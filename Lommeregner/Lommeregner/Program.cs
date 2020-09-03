@@ -6,7 +6,7 @@ namespace Lommeregner
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello gayboy thomas!");
+            Console.WriteLine("Hello Thomas!");
         }
     }
 }
