@@ -1,9 +1,12 @@
 using NUnit.Framework;
+using System;
+using Lommeregner;
 
 namespace Lommeregner.Unit.Test
 {
     public class Tests
     {
+       
         [SetUp]
         public void Setup()
         {
@@ -19,8 +22,9 @@ namespace Lommeregner.Unit.Test
         [Test]
         public void Add_AddingTwoPositiveIntegers_NItemIsCorrect()
         {
-          /*  //Arrange
-            var uut = new Program();
+            //Arrange
+            
+            /*var uut = new Calculator();
 
             //Act
             var testResult = uut.Add(2, 4);
@@ -29,6 +33,7 @@ namespace Lommeregner.Unit.Test
             // Assert
             Assert.That(testResult, Is.EqualTo(expectedResult));
             */
+            
 
         }
     }
