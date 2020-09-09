@@ -8,5 +8,6 @@ namespace Lommeregner
         {
             Console.WriteLine("Hello Thomas!");
         }
+
     }
 }
