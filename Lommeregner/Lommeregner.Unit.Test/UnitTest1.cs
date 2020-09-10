@@ -47,6 +47,12 @@ namespace Lommeregner.Unit.Test
         */
         }
 
-       
+        [TestCase(3, 3, 6)]
+        [TestCase(4,-2,2)]
+        public void Added_Test(double a, double b, double result)
+        {
+            Calculator uut = new Calculator();
+            Assert.That(uut.Added(a,b),Is.EqualTo(result));
+        }
     }
 }
