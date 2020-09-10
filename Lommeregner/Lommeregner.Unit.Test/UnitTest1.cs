@@ -57,6 +57,17 @@ namespace Lommeregner.Unit.Test
             Assert.That(uut.Substracted(a,b), Is.EqualTo(result).Within(0.0001));
         }
 
+        [TestCase(2, 3, 8)]
+        [TestCase(0.5,0.7,0.61557)]
+        [TestCase(5,0,1)]
+        [TestCase(0,5,0)]
+        public void Exponed_TestCases(double a, double b, double result)
+        {
+            var uut = new Calculator();
+            
+            Assert.That(uut.Exponed(a,b), Is.EqualTo(result).Within(0.0001));
+        }
+
         
 
 
