@@ -53,5 +53,13 @@ namespace Lommeregner.Unit.Test
             double result = uut.Multiply(a, b);
             Assert.That(result,Is.EqualTo(ExpectedResult).Within(0.0003));
         }
+        [TestCase(8,2,4)]
+        [TestCase(10,4,2.5)]
+        [TestCase(10,0,0)]
+        public void Divide_test(double a, double b, double ExpectedResult)
+        {
+            double result = uut.Divide(a, b);
+            Assert.That(result,Is.EqualTo(ExpectedResult));
+        }
     }
 }
