@@ -7,30 +7,27 @@ namespace Lommeregner.Unit.Test
     [TestFixture]
     public class Tests
     {
+        private Calculator uut;
 
         [SetUp]
         public void Setup()
         {
             var uut = new Calculator();
+            
         }
 
-        [Test]
-        public void Add_AddingTwoPositiveIntegers_NItemIsCorrect()
+        [TestCase(1,1,2)]
+        [TestCase(-5,-3,-8)]
+        public void Add_AddingTwoPositiveIntegers_NItemIsCorrect(double a, double b, double expectedResult)
         {
-            //Arrange
-            var uut = new Calculator();
+          
+            
+            double result = uut.Add(a, b);
+            Assert.That(result,Is.EqualTo(expectedResult));
 
 
-            //Act
-            double numberA = 3;
 
-            var testResult = uut.Add(numberA);
-
-            var expectedResult = numberA;
-
-            //Assert
-            Assert.That(testResult, Is.EqualTo(expectedResult));
-            Assert.Pass();
+            
         }
 
         [Test]
@@ -50,37 +47,31 @@ namespace Lommeregner.Unit.Test
         [TestCase(10, 5, 5)]
         [TestCase(-4,-4,0)]
         [TestCase(0.9,0.3,0.6)]
-        public void Substracted_TestCases(double a, double b, double result)
+        public void Substract_TestCases(double a, double b, double result)
         {
             var uut = new Calculator();
             
-            Assert.That(uut.Substracted(a,b), Is.EqualTo(result).Within(0.0001));
+            Assert.That(uut.Substract(a,b), Is.EqualTo(result).Within(0.0001));
         }
 
         [TestCase(2, 3, 8)]
         [TestCase(0.5,0.7,0.61557)]
         [TestCase(5,0,1)]
         [TestCase(0,5,0)]
-        public void Exponed_TestCases(double a, double b, double result)
+        public void Power_TestCases(double a, double b, double result)
         {
             var uut = new Calculator();
             
-            Assert.That(uut.Exponed(a,b), Is.EqualTo(result).Within(0.0001));
+            Assert.That(uut.Power(a,b), Is.EqualTo(result).Within(0.0001));
         }
-
         
-
-
-
-
-
         [TestCase(3, 3, 6)]
         [TestCase(4,-2,2)]
         [TestCase(3.3,-4.4,-1.1)]
-        public void Added_Test(double a, double b, double result)
+        public void Add_Test(double a, double b, double result)
         {
             Calculator uut = new Calculator();
-            Assert.That(uut.Added(a,b),Is.EqualTo(result).Within(0.000003));
+            Assert.That(uut.Add(a,b),Is.EqualTo(result).Within(0.000003));
         }
 
         [TestCase(4, 4, 16)]
@@ -90,7 +81,7 @@ namespace Lommeregner.Unit.Test
         public void Multiply_Test(double a, double b, double result)
         {
             Calculator uut = new Calculator();
-            Assert.That(uut.multiply(a,b),Is.EqualTo(result).Within(0.0003));
+            Assert.That(uut.Multiply(a,b),Is.EqualTo(result).Within(0.0003));
         }
     }
 }
