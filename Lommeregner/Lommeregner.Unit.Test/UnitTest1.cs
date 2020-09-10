@@ -53,7 +53,7 @@ namespace Lommeregner.Unit.Test
         public void Added_Test(double a, double b, double result)
         {
             Calculator uut = new Calculator();
-            Assert.That(uut.Added(a,b),Is.EqualTo(result));
+            Assert.That(uut.Added(a,b),Is.EqualTo(result).Within(0.000003));
         }
 
         [TestCase(4, 4, 16)]
