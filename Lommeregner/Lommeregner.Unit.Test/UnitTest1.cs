@@ -14,7 +14,7 @@ namespace Lommeregner.Unit.Test
             var uut = new Calculator();
         }
 
-        [TestCase(3,2,5)]
+       [Test]
         public void Add_AddingTwoPositiveIntegers_NItemIsCorrect()
         {
             //Arrange
@@ -33,15 +33,20 @@ namespace Lommeregner.Unit.Test
             Assert.Pass();
         }
 
-
         [Test]
-        public void Add_AddingOneNegativeIntegerAndOnePositiveInteger_NItemIsCorrect()
+        public void Add_AddingOnePositiveIntegerAndOneNegative_NItemIsCorrect()
         {
-            //Arrange
+           /* var uut = new Calculator();
+            
+            double numberA = 5;
+            double NumberB = 7;
+            
+            
+            Assert.That(uut.Accumulator, Is.EqualTo(12));
 
-            //Act
-
-            //Assert
+        */
         }
+
+       
     }
 }
