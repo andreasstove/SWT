@@ -33,6 +33,42 @@ namespace Lommeregner
             Accumulator += addend;
             return Accumulator;
         }
+
+        public double Added(double a, double b)
+        {
+            double c = a + b;
+            return c;
+        }
+
+        public double substracted(double a, double b)
+        {
+            double c = a - b;
+            return c;
+        }
+
+
+        public double divided(double a, double b)
+        {
+            if (a == 0 || b == 0)
+                return 0;
+            else
+            {
+                double c = a / b;
+                return c;
+            }
+        }
+
+        public double exponed(double a, double b)
+        {
+            double c = Math.Pow(a, b);
+            return c;
+        }
+
+        public double multiply(double a, double b)
+        {
+            double c = a * b;
+            return c;
+        }
         public double Subtract(double subtractor)
         {
             Accumulator -= subtractor;
