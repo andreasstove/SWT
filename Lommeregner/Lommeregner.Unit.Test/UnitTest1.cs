@@ -4,12 +4,14 @@ using Lommeregner;
 
 namespace Lommeregner.Unit.Test
 {
+    [TestFixture]
     public class Tests
     {
        
         [SetUp]
         public void Setup()
         {
+
         }
 
         [Test]
