@@ -63,7 +63,7 @@ namespace Lommeregner.Unit.Test
         public void Multiply_Test(double a, double b, double result)
         {
             Calculator uut = new Calculator();
-            Assert.That(uut.multiply(a,b),Is.EqualTo(result));
+            Assert.That(uut.multiply(a,b),Is.EqualTo(result).Within(0.0003));
         }
     }
 }
