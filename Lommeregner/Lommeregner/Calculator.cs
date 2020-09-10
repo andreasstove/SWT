@@ -40,7 +40,7 @@ namespace Lommeregner
             return c;
         }
 
-        public double substracted(double a, double b)
+        public double Substracted(double a, double b)
         {
             double c = a - b;
             return c;
@@ -58,7 +58,7 @@ namespace Lommeregner
             }
         }
 
-        public double exponed(double a, double b)
+        public double Exponed(double a, double b)
         {
             double c = Math.Pow(a, b);
             return c;
