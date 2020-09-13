@@ -15,27 +15,27 @@ namespace Lommeregner
 
         public double Divide(double dividend, double divisor)
         {
-            //if (dividend == 0 || divisor == 0)
-            //    throw new DividedByZero();
-            //else
-            //{
-            //    Accumulator = dividend / divisor;
-            //    return Accumulator;
-            //}
-            try
+            if (dividend == 0 || divisor == 0)
+                throw new DividedByZero();
+            else
             {
-
                 Accumulator = dividend / divisor;
-                throw new DivideByZeroException();
-                //return Accumulator;
+                return Accumulator;
             }
-            catch (DivideByZeroException)
-            {
-                Console.WriteLine("Division by zero.");
-             
-            }
+            //try
+            //{
 
-            return Accumulator;
+            //    Accumulator = dividend / divisor;
+            //    throw new DivideByZeroException();
+            //    //return Accumulator;
+            //}
+            //catch (DivideByZeroException)
+            //{
+            //    Console.WriteLine("Division by zero.");
+
+            //}
+
+            //return Accumulator;
         }
         public double Accumulator { get; private set; }
 
@@ -78,8 +78,13 @@ namespace Lommeregner
 
         public double Power(double a, double b)
         {
-            Accumulator = Math.Pow(a, b);
-            return Accumulator;
+            if (a < 0)
+                throw  new PowerToNegativeNumber();
+            else
+            {
+                Accumulator = Math.Pow(a, b);
+                return Accumulator;
+            }
         }
 
         public double Multiply(double a, double b)
@@ -104,10 +109,17 @@ namespace Lommeregner
         }
 
 
-        public class DividedByZero : Exception
-        {
-            public DividedByZero(){Console.WriteLine("Du må ikke dele med 0");}
+        
+    }
+    public class DividedByZero : Exception
+    {
+        public DividedByZero() { Console.WriteLine("Du må ikke dele med 0"); }
 
+    }
+
+    public class PowerToNegativeNumber : Exception
+    {
+        public PowerToNegativeNumber() {Console.WriteLine("Maskinen kan ikke håndtere et negativt grundtaltal");
         }
     }
 

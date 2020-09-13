@@ -4,6 +4,7 @@ using System;
 using System.Reflection.Metadata.Ecma335;
 using Lommeregner;
 using NUnit.Framework.Constraints;
+using System.Threading.Tasks;
 
 namespace Lommeregner.Unit.Test
 {
@@ -22,10 +23,24 @@ namespace Lommeregner.Unit.Test
         [TestCase(3, 3, 6)]
         [TestCase(4, -2, 2)]
         [TestCase(3.3, -4.4, -1.1)]
-        public void Add_Test(double a, double b, double ExpectectedResult)
+        public void Add_Test(double a, double b, double ExpectedResult)
         {
             double result = _uut.Add(a, b);
-            Assert.That(result, Is.EqualTo(ExpectectedResult).Within(0.000003));
+            Assert.That(result, Is.EqualTo(ExpectedResult).Within(0.000003));
+        }
+
+        [TestCase(3, 3, 3, 3, 12)]
+        [TestCase(4, 4, 4, 4, 16)]
+        [TestCase(-2.5, -3.5, -4.5, -5.5, -16)]
+        public void Add_AccumulitorTest(double a, double b, double c, double d, double ExpectedResult)
+        {
+            _uut.Clear();
+            _uut.Add(a);
+            _uut.Add(b);
+            _uut.Add(c);
+            double result = _uut.Add(d);
+
+            Assert.That(result, Is.EqualTo(ExpectedResult));
         }
 
         [TestCase(10, 5, 5)]
@@ -36,17 +51,48 @@ namespace Lommeregner.Unit.Test
             double result = _uut.Subtract(a, b);
             Assert.That(result, Is.EqualTo(ExpectedResult).Within(0.0001));
         }
+        [TestCase(3, 3, 3, 3, -12)]
+        [TestCase(4, 4, 4, 4, -16)]
+        [TestCase(-2.5, -3.5, -4.5, -5.5, 16)]
+        public void Subtract_AccumulitorTest(double a, double b, double c, double d, double ExpectedResult)
+        {
+            _uut.Clear();
+            _uut.Subtract(a);
+            _uut.Subtract(b);
+            _uut.Subtract(c);
+            double result = _uut.Subtract(d);
 
+            Assert.That(result, Is.EqualTo(ExpectedResult));
+        }
         [TestCase(2, 3, 8)]
         [TestCase(0.5,0.7,0.61557)]
         [TestCase(5,0,1)]
         [TestCase(0,5,0)]
+        [TestCase(2,-1.5,0.3535)]
         public void Power_TestCases(double a, double b, double ExpectedResult)
         {
             double result = _uut.Power(a, b);
             Assert.That(result, Is.EqualTo(ExpectedResult).Within(0.0001));
         }
+        [Test]
+        public void Power_NegativeGroundNumber_ExpectAException()
+        {
+            Assert.Throws<PowerToNegativeNumber>(() => _uut.Power(-2, 4));
+            
+        }
+        [TestCase(2, 2,16)]
+        [TestCase(4, 4,  65536)]
+        [TestCase(-2.5, -3.5,430.538965)]
+        public void Power_AccumulitorTest(double a, double b, double ExpectedResult)
+        {
+            _uut.Clear();
+            _uut.Add(2);
+            _uut.Power(a);
+            double result =  _uut.Power(b);
+          
 
+            Assert.That(result, Is.EqualTo(ExpectedResult).Within(0.00001));
+        }
         [TestCase(4, 4, 16)]
         [TestCase(-3, 7, -21)]
         [TestCase(2.5, 6, 15)]
@@ -55,6 +101,20 @@ namespace Lommeregner.Unit.Test
         {
             double result = _uut.Multiply(a, b);
             Assert.That(result,Is.EqualTo(ExpectedResult).Within(0.0003));
+        }
+        [TestCase(3, 3, 3, 3, 81)]
+        [TestCase(4, 4, 4, 4, 256)]
+        [TestCase(-2.5, -3.5, -4.5, -5.5, 216.5625)]
+        public void Multiply_AccumulitorTest(double a, double b, double c, double d, double ExpectedResult)
+        {
+            _uut.Clear();
+            _uut.Add(1);
+            _uut.Multiply(a);
+            _uut.Multiply(b);
+            _uut.Multiply(c);
+            double result = _uut.Multiply(d);
+
+            Assert.That(result, Is.EqualTo(ExpectedResult));
         }
         [TestCase(8,2,4)]
         [TestCase(10,4,2.5)]
@@ -99,25 +159,21 @@ namespace Lommeregner.Unit.Test
         public void Divide_DivideWithZero_ReturnException()
         {
             
-            //Calculator calc = new Calculator();
-            //calc.Divide(3, 0);
-            _uut.Clear();
-           // var result = _uut.Divide(4, 0);
-           //var resultat = _uut.Divide(3, 0);
-           Assert.Throws<DivideByZeroException>(() => _uut.Divide(3,0));
-           //Assert.That(exe,Is.EqualTo(0));
-           //throw new AssertionException();
-           //Exception
+           _uut.Clear();
+           Assert.Throws<DividedByZero>(() => _uut.Divide(3,0));
+          
         }
 
-        [Test]
-        public void Blabla()
+        [TestCase(2, 2, 2, 0.125)]
+        [TestCase(4,4,1, 0.0625)]
+        [TestCase(-0.5,-0.5,-0.5, -8)]
+        public void Divide_DicideAccumilator(double a, double b, double c, double ExpectedResult)
         {
-            _uut.Clear();
-            var ex = Assert.Throws<DivideByZeroException>(() => _uut.Divide(3, 0));
-            //Assert.Contains("Division by zero.",ex.Message);
-            Assert.Equals("Division by zero.", ex.Message);
+            _uut.Add(1);
+            _uut.Divide(a);
+            _uut.Divide(b);
+            double result = _uut.Divide(c);
+            Assert.That(result, Is.EqualTo(ExpectedResult).Within(0.0000001));
         }
-        
     }
 }
