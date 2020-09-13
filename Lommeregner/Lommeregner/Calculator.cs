@@ -51,7 +51,7 @@ namespace Lommeregner
         public double Divide(double divisor)
         {
             if (divisor == 0)
-                return 0;
+                throw new DivideByZeroException();
             else
             {
                 Accumulator /= divisor;

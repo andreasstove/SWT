@@ -2,17 +2,19 @@ using NUnit.Framework;
 
 using System;
 using Lommeregner;
+using NUnit.Framework.Constraints;
+
 namespace Lommeregner.Unit.Test
 {
     [TestFixture]
     public class Tests
     { 
-        private Calculator uut = new Calculator();
+        private readonly Calculator _uut = new Calculator();
 
         [SetUp]
         public void Setup()
         {
-           Calculator uut;
+           Calculator _uut;
             
         }
 
@@ -21,7 +23,7 @@ namespace Lommeregner.Unit.Test
         [TestCase(3.3, -4.4, -1.1)]
         public void Add_Test(double a, double b, double ExpectectedResult)
         {
-            double result = uut.Add(a, b);
+            double result = _uut.Add(a, b);
             Assert.That(result, Is.EqualTo(ExpectectedResult).Within(0.000003));
         }
 
@@ -30,7 +32,7 @@ namespace Lommeregner.Unit.Test
         [TestCase(0.9,0.3,0.6)]
         public void Subtract_TestCases(double a, double b, double ExpectedResult)
         {
-            double result = uut.Subtract(a, b);
+            double result = _uut.Subtract(a, b);
             Assert.That(result, Is.EqualTo(ExpectedResult).Within(0.0001));
         }
 
@@ -40,7 +42,7 @@ namespace Lommeregner.Unit.Test
         [TestCase(0,5,0)]
         public void Power_TestCases(double a, double b, double ExpectedResult)
         {
-            double result = uut.Power(a, b);
+            double result = _uut.Power(a, b);
             Assert.That(result, Is.EqualTo(ExpectedResult).Within(0.0001));
         }
 
@@ -50,7 +52,7 @@ namespace Lommeregner.Unit.Test
         [TestCase(100, 100, 10000)]
         public void Multiply_Test(double a, double b, double ExpectedResult)
         {
-            double result = uut.Multiply(a, b);
+            double result = _uut.Multiply(a, b);
             Assert.That(result,Is.EqualTo(ExpectedResult).Within(0.0003));
         }
         [TestCase(8,2,4)]
@@ -58,8 +60,44 @@ namespace Lommeregner.Unit.Test
         [TestCase(10,0,0)]
         public void Divide_test(double a, double b, double ExpectedResult)
         {
-            double result = uut.Divide(a, b);
+            double result = _uut.Divide(a, b);
             Assert.That(result,Is.EqualTo(ExpectedResult));
+        }
+
+        [Test]
+        public void Clear_TheAccumulatorsValueIsFive_SetAccumulatorToZero()
+        {
+            _uut.Add(3, 2);
+            _uut.Clear();
+            double result = _uut.Accumulator;
+            double ExpectedResult = 0;
+            Assert.That(result,Is.EqualTo(ExpectedResult));
+        }
+
+        [Test]
+        public void Clear_TheAccumulatorsValueIsMinusFivePointFive_SetAccumulatorToZero()
+        {
+            _uut.Add(-3,2.5 );
+            _uut.Clear();
+            double result = _uut.Accumulator;
+            double ExpectedResult = 0;
+            Assert.That(result, Is.EqualTo(ExpectedResult));
+
+        }
+
+        [Test]
+        public void Clear_TheAccumulatorsValueIsZero_SetAccumulatorToZero()
+        {
+            _uut.Clear();
+            double result = _uut.Accumulator;
+            double ExpectedResult = 0;
+            Assert.That(result, Is.EqualTo(ExpectedResult));
+        }
+
+        [Test]
+        public void Divide_DivideWithZero_ReturnException()
+        {
+            
         }
     }
 }
