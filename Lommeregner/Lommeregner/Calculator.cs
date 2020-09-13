@@ -7,6 +7,7 @@ namespace Lommeregner
     {
         static void Main()
         {
+            
             Console.WriteLine("Hello Thomas!");
         }
 
@@ -34,40 +35,41 @@ namespace Lommeregner
             return Accumulator;
         }
 
-        public double Added(double a, double b)
+        public double Add(double a, double b)
         {
-            double c = a + b;
-            return c;
+            Accumulator = a + b;
+            return Accumulator;
         }
 
-        public double Substracted(double a, double b)
+        public double Subtract(double a, double b)
         {
-            double c = a - b;
-            return c;
+            Accumulator = a - b;
+            return Accumulator;
         }
 
 
-        public double divided(double a, double b)
+        public double Divide(double divisor)
         {
-            if (a == 0 || b == 0)
-                return 0;
+            if (divisor == 0)
+                throw new DivideByZeroException();
             else
             {
-                double c = a / b;
-                return c;
+                Accumulator /= divisor;
+                return Accumulator;
+
             }
         }
 
-        public double Exponed(double a, double b)
+        public double Power(double a, double b)
         {
-            double c = Math.Pow(a, b);
-            return c;
+            Accumulator = Math.Pow(a, b);
+            return Accumulator;
         }
 
-        public double multiply(double a, double b)
+        public double Multiply(double a, double b)
         {
-            double c = a * b;
-            return c;
+            Accumulator = a * b;
+            return Accumulator;
         }
         public double Subtract(double subtractor)
         {
