@@ -7,19 +7,35 @@ namespace Lommeregner
     {
         static void Main()
         {
-            
+           // Calculator calc = new Calculator();
+            //calc.Divide(3, 0);
             Console.WriteLine("Hello Thomas!");
+            
         }
 
         public double Divide(double dividend, double divisor)
         {
-            if (dividend == 0 || divisor == 0)
-                return 0;
-            else
+            //if (dividend == 0 || divisor == 0)
+            //    throw new DividedByZero();
+            //else
+            //{
+            //    Accumulator = dividend / divisor;
+            //    return Accumulator;
+            //}
+            try
             {
+
                 Accumulator = dividend / divisor;
-                return Accumulator;
+                throw new DivideByZeroException();
+                //return Accumulator;
             }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("Division by zero.");
+             
+            }
+
+            return Accumulator;
         }
         public double Accumulator { get; private set; }
 
@@ -87,6 +103,12 @@ namespace Lommeregner
             return Accumulator;
         }
 
+
+        public class DividedByZero : Exception
+        {
+            public DividedByZero(){Console.WriteLine("Du må ikke dele med 0");}
+
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 using NUnit.Framework;
 
 using System;
+using System.Reflection.Metadata.Ecma335;
 using Lommeregner;
 using NUnit.Framework.Constraints;
 
@@ -98,6 +99,25 @@ namespace Lommeregner.Unit.Test
         public void Divide_DivideWithZero_ReturnException()
         {
             
+            //Calculator calc = new Calculator();
+            //calc.Divide(3, 0);
+            _uut.Clear();
+           // var result = _uut.Divide(4, 0);
+           //var resultat = _uut.Divide(3, 0);
+           Assert.Throws<DivideByZeroException>(() => _uut.Divide(3,0));
+           //Assert.That(exe,Is.EqualTo(0));
+           //throw new AssertionException();
+           //Exception
         }
+
+        [Test]
+        public void Blabla()
+        {
+            _uut.Clear();
+            var ex = Assert.Throws<DivideByZeroException>(() => _uut.Divide(3, 0));
+            //Assert.Contains("Division by zero.",ex.Message);
+            Assert.Equals("Division by zero.", ex.Message);
+        }
+        
     }
 }
