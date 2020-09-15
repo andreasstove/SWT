@@ -5,6 +5,7 @@ using System.Reflection.Metadata.Ecma335;
 using Lommeregner;
 using NUnit.Framework.Constraints;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Lommeregner.Unit.Test
 {
@@ -18,6 +19,18 @@ namespace Lommeregner.Unit.Test
         {
            Calculator _uut;
             
+        }
+
+        [TestCase(4, 3, 7)]
+        [TestCase(3, 2, 5)]
+        [TestCase(4, -5, -1)]
+        public void Accumulator_Test(double a, double b, double ExpectedResult)
+        {
+            _uut.Clear();
+            _uut.Add(a);
+            _uut.Add(b);
+            double result = _uut.Accumulator;
+            Assert.That(result, Is.EqualTo(ExpectedResult));
         }
 
         [TestCase(3, 3, 6)]
@@ -118,7 +131,7 @@ namespace Lommeregner.Unit.Test
         }
         [TestCase(8,2,4)]
         [TestCase(10,4,2.5)]
-        [TestCase(10,0,0)]
+        [TestCase(10,2,5)]
         public void Divide_test(double a, double b, double ExpectedResult)
         {
             double result = _uut.Divide(a, b);
@@ -164,15 +177,16 @@ namespace Lommeregner.Unit.Test
           
         }
 
-        [TestCase(2, 2, 2, 0.125)]
-        [TestCase(4,4,1, 0.0625)]
-        [TestCase(-0.5,-0.5,-0.5, -8)]
-        public void Divide_DicideAccumilator(double a, double b, double c, double ExpectedResult)
+        [TestCase(2, 2,25)]
+        [TestCase(4, 4,6.25)]
+        [TestCase(-0.5, -0.5,400)]
+        public void Divide_DicideAccumilator(double a, double b, double ExpectedResult)
         {
-            _uut.Add(1);
+            _uut.Clear();
+            _uut.Add(100);
+
             _uut.Divide(a);
-            _uut.Divide(b);
-            double result = _uut.Divide(c);
+            double result = _uut.Divide(b);
             Assert.That(result, Is.EqualTo(ExpectedResult).Within(0.0000001));
         }
     }
